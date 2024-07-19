@@ -1,0 +1,120 @@
+.login-box {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  > * {
+    position: absolute;
+    top: 0;
+    height: 100%;
+  }
+  .login--bg {
+    left: 0;
+    width: 90vw;
+    object-fit: cover;
+    animation: initShow .6s ease-out both;
+    @keyframes initShow {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.02);
+      }
+    }
+  }
+  .login--card {
+    right: 0;
+    overflow: hidden;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 12px 0 0 12px;
+    box-shadow: -10px 0px 27px 0px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: cardShow .4s ease-in-out both;
+    .web--title {
+      font-size: 60px;
+      cursor: pointer;
+      color: #275DC5;
+    }
+    .web--detail {
+      font-size: 14px;
+      height: 60px;
+      line-height: 60px;
+    }
+    .pwd-box__input {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      &:hover {
+        .pwd-icon--right {
+          top: 4px;
+        }
+      }
+      .pwd-icon {
+        position: absolute;
+        transition: .3s all;
+        left: 5px;
+        width: 36px;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .pwd-icon--left {
+        width: 36px;
+        top: 0;
+        left: 5px;
+        svg {
+          float: right;
+          transform: rotate(90deg);
+        }
+      }
+      .pwd-icon--right {
+        top: -40px;
+        right: 5px;
+        cursor: pointer;
+        border-radius: 4px;
+        &:hover {
+          background-color: rgba(255,255,255,.1);
+        }
+      }
+      .pwd__input {
+        display: inline-block;
+        color: #fff;
+        width: 200px;
+        height: 36px;
+        padding: 5px 45px 5px 45px;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        background: #275DC5;
+        transition: .3s background-color;
+        &:focus {
+          outline: none;
+        }
+      }
+      .login--prompt {
+        position: absolute;
+        width: 100%;
+        height: 46px;
+        line-height: 46px;
+        text-align: center;
+        color: #fff;
+        transition: .3s all ease-in;
+      }
+    }
+    @keyframes cardShow {
+      from {
+        width: 10vw;
+        min-width: 0;
+      }
+      to {
+        width: 30vw;
+        min-width: 400px;
+      }
+    }
+  }
+}

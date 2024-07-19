@@ -1,0 +1,15 @@
+@media screen and (max-width: 980px) {
+  .main-right {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .nav {
+    padding: 0 20px !important;
+  }
+  .main-right {
+    max-width: 250px !important;
+    margin-left: 20px !important;
+  }
+}

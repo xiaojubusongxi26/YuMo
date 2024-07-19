@@ -1,0 +1,61 @@
+@mixin card-box($border-radius: 12px) {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+}
+
+@mixin box-border($size: 1px) {
+  transition: 0.5s all;
+  box-sizing: border-box;
+  border: $size solid var(--border);
+  &:hover {
+    border: $size solid var(--box-border);
+  }
+}
+
+@mixin box-shadow() {
+  box-shadow: 4px 5px 15px 3px rgba(0, 0, 0, 0.05);
+}
+
+@mixin flex-center($x: center, $y: center) {
+  display: flex;
+  justify-content: $x;
+  align-items: $y;
+}
+
+// 单行文本省略
+@mixin ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+}
+
+// 多行文本省略
+@mixin multiline-ellipsis($row: 2) {
+  word-break: break-all;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $row; // 2行
+  -webkit-box-orient: vertical;
+}
+
+// 蒙层
+@mixin mask($opacity: .3, $zIndex: 1000) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, $opacity);
+  z-index: $zIndex;
+}
+
+@mixin font-title($size: 16px, $weight: bold) {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+    Lato, Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+}

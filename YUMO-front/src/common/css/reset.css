@@ -1,0 +1,12 @@
+/* 引入字体 */
+@font-face {
+    font-family: '寒蝉全圆体';
+    src: url("../font/ChillRoundF.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* 使用字体 */
+body {
+    font: 16px '寒蝉全圆体';
+}

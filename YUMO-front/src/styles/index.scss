@@ -1,0 +1,94 @@
+@import "./theme/light.scss";
+@import "./theme/dark.scss";
+@import "./mixin.scss";
+@import "./media.scss";
+@import "./animation.scss";
+/* 公共样式 */
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 20px;
+
+  --theme-color: #425aef;
+  --theme-color-hover: #6f82ff23;
+  --theme-color-light: #fff;
+  --theme-color-light_second: #b7b7b7;
+  --red-color: #fa595c;
+  --shadow-border: 0 8px 16px -4px rgba(44, 45, 48, 0.047);
+  --input-bg: #cacaca2a;
+  --mask10: rgb(0 0 0 / 10%);
+  --mask20: rgb(0 0 0 / 20%);
+  --mask30: rgb(0 0 0 / 30%);
+  --mask50: rgb(0 0 0 / 50%);
+  --bg-light1: rgba(255, 255, 255, 0.1);
+  --bg-light2: rgba(255, 255, 255, 0.2);
+  --bg-light3: rgba(255, 255, 255, 0.3);
+
+  /* Ju组件样式 */
+  --ju-popover-background: #454545;
+}
+
+body {
+  // transition: 0.3s all;
+  background: var(--bg);
+  position: relative;
+  overscroll-behavior-y: none;
+  overflow-anchor: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* 框架样式 */
+.view-box {
+  margin: auto;
+  padding-top: 110px;
+  width: 80vw;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(-90px);
+}
+
+.font-famaily__title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+    Lato, Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.bar-item {
+  transition: 0.3s all;
+  &:hover {
+    background-color: var(--theme-color);
+    color: #fff !important;
+  }
+}
+.bar-item__active {
+  background-color: var(--theme-color);
+  color: #fff !important;
+}
+
+/* 去掉input[number]框中的上下箭头选择器 */
+input[type="number"] {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  -moz-appearance: textfield;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+// 单行文本省略
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+}
