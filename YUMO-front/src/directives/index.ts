@@ -2,11 +2,13 @@ import { App } from "vue";
 // 导入自定义指令
 import InputFocusAuto from "@/directives/InputFocusAuto";
 import SlideIn from "./SlideIn";
+import debounce from "./debounce";
 
 const directives: any = {
   //汇总自定义指令
   InputFocusAuto,
   SlideIn,
+  debounce,
 };
 
 export default {

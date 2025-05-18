@@ -20,14 +20,14 @@ export default defineConfig({
   },
   base: "./", // 设置打包路径
   server: {
-    port: 4000, // 设置服务启动端口号
+    port: 6100, // 设置服务启动端口号
     open: true, // 设置服务启动时是否自动打开浏览器
     cors: true, // 允许跨域
-
+    host: "0.0.0.0",
     // 设置代理，根据我们项目实际情况配置
     proxy: {
       "/api": {
-        target: "https://api.douban.com",
+        target: "http://localhost:3000",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace("/api/", "/"),

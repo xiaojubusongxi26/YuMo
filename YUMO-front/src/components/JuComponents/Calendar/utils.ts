@@ -1,3 +1,4 @@
+import { getSolarDate } from "@/api/home";
 import { Solar, HolidayUtil } from "lunar-javascript";
 
 export interface DateInfoBaseModel {
@@ -20,7 +21,25 @@ export interface DateInfoModel extends DateInfoBaseModel {
   isCurrentMonth: boolean;
   solarTerm: string | null;
   isWork?: boolean;
-  happy?: boolean;
+  birthday?: any;
+}
+
+// ------------------------------ 暂存数据 ------------------------------
+let birthdays: any = {};
+
+export async function fetchBirthdayByYear(year: number) {
+  // 获取前今后三年的生日信息
+  const res = await getSolarDate([year - 1, year, year + 1].toString());
+  if (res.code === 0) {
+    birthdays = res.data;
+  }
+}
+
+// 获取生日信息
+export function getBirthdayInfo(date: string) {
+  const res = birthdays[date]?.length ? birthdays[date][0] : false;
+  res && (res.date = date);
+  return res;
 }
 
 export function getCurrentMonth() {
@@ -138,11 +157,12 @@ export function getCalendarDates(year: number, month: number): DateInfoModel[] {
     const lunar = solar.getLunar();
     const holiday = HolidayUtil.getHoliday(year, month + 1, i);
 
+    const currentDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(
+      i
+    ).padStart(2, "0")}`;
+
     const dateObj = <DateInfoModel>{
-      date: `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(
-        2,
-        "0"
-      )}`,
+      date: currentDate,
       year: year,
       month: month + 1,
       day: i,
@@ -150,7 +170,7 @@ export function getCalendarDates(year: number, month: number): DateInfoModel[] {
       lunar: lunar.getDayInChinese(),
       solarTerm: lunar.getJieQi(),
       isCurrentMonth: true,
-      happy: true,
+      birthday: getBirthdayInfo(currentDate),
       holiday: !holiday
         ? null
         : {
@@ -176,11 +196,13 @@ export function getCalendarDates(year: number, month: number): DateInfoModel[] {
     const solar = Solar.fromYmd(nextYear, nextMonth + 1, i);
     const lunar = solar.getLunar();
     const holiday = HolidayUtil.getHoliday(nextYear, nextMonth + 1, i);
+    const currentDate = `${nextYear}-${String(nextMonth + 1).padStart(
+      2,
+      "0"
+    )}-${String(i).padStart(2, "0")}`;
 
     const dateObj = <DateInfoModel>{
-      date: `${nextYear}-${String(nextMonth + 1).padStart(2, "0")}-${String(
-        i
-      ).padStart(2, "0")}`,
+      date: currentDate,
       year: nextYear,
       month: nextMonth + 1,
       day: i,
@@ -189,6 +211,7 @@ export function getCalendarDates(year: number, month: number): DateInfoModel[] {
       isCurrentMonth: false,
       lunar: lunar.getDayInChinese(),
       solarTerm: lunar.getJieQi(),
+      birthday: getBirthdayInfo(currentDate),
       holiday: !holiday
         ? null
         : {

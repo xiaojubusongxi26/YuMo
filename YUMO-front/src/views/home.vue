@@ -37,7 +37,7 @@ const isFullCalendar = ref<boolean>(false);
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translateY(-90px);
+  transform: translateY(-70px);
   width: 100vw;
   max-width: 100vw;
   padding-top: 0;

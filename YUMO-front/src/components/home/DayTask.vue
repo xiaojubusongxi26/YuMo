@@ -36,55 +36,132 @@
       </h2>
     </header>
     <div class="edit-input">
-      <input type="text" class="line-bar" />
+      <input
+        type="text"
+        class="line-bar"
+        v-model.trim="todoForm.todoThing"
+        v-debounce:keydown.enter="{ handler: handleAddTodo, delay: 300 }"
+      />
       <div class="edit_svg">
         <ju-icon name="edit" :size="22"></ju-icon>
       </div>
     </div>
-    <div class="task-list">
-      <div class="task-item line-bar">
-        <span class="task_number">1.</span>
-        <div class="task_content">
-          <ju-popover>
-            <template v-slot:reference>
-              完成popover组件，完成popover组件完成popover组件完成popover组件完成popover组件，完成popover组件完成popover组件完成popover组件完成popover组件完成popover组件完成popover组件
-            </template>
-          </ju-popover>
-        </div>
-        <div class="edit_svg task-del">
-          <ju-icon name="close" :size="12"></ju-icon>
-        </div>
-        <span class="task_status">
-          <ju-icon name="finish" :color="'#00D26E'" :size="24"></ju-icon>
+    <div class="task-list" v-if="todoList.length">
+      <div
+        class="task-item line-bar"
+        v-for="(item, index) in todoList"
+        :key="item.id"
+      >
+        <span
+          class="flex-c cur-p"
+          :style="{
+            color: item.isEnd ? '#3fb20e' : '#000',
+            transform: '.2s color',
+          }"
+          @click="handleUpdate(item)"
+        >
+          <svg
+            t="1746716307566"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="11891"
+            width="18"
+            height="18"
+          >
+            <path
+              d="M791.1 957.6H233.5c-75.5 0-136.9-61.4-136.9-136.9V199.5C96.6 124 158 62.6 233.5 62.6h557.7c75.5 0 136.9 61.4 136.9 136.9v621.2c-0.1 75.5-61.5 136.9-137 136.9zM233.5 152.1c-26.1 0-47.4 21.3-47.4 47.4v621.2c0 26.1 21.3 47.4 47.4 47.4h557.7c26.1 0 47.4-21.3 47.4-47.4V199.5c0-26.1-21.3-47.4-47.4-47.4H233.5z"
+              fill="currentColor"
+              class="finish-icon"
+              p-id="11892"
+            ></path>
+            <path
+              v-show="item.isEnd"
+              d="M457.4 702c-11.4 0-22.9-4.4-31.6-13.1L286.3 549.4c-17.5-17.5-17.5-45.8 0-63.3s45.8-17.5 63.3 0l107.8 107.8L675 376.4c17.5-17.5 45.8-17.5 63.3 0s17.5 45.8 0 63.3L489.1 688.9c-8.8 8.7-20.2 13.1-31.7 13.1z"
+              fill="currentColor"
+              class="finish-icon"
+              p-id="11893"
+            ></path>
+          </svg>
         </span>
-      </div>
-      <div class="task-item line-bar">
-        <span class="task_number">2.</span>
+        <span class="task_number fs-16 ml-10">{{ index + 1 }}.</span>
         <div class="task_content">
           <ju-popover>
             <template v-slot:reference>
-              Vue.js程序设计与实现，学习学习学习
+              {{ item.todoThing }}
             </template>
           </ju-popover>
         </div>
-        <div class="edit_svg task-del">
-          <ju-icon name="close" :size="12"></ju-icon>
-        </div>
-        <div class="task_status">
-          <ju-icon
-            name="hand"
-            style="cursor: pointer"
-            :color="'#EE7950'"
-            :size="24"
-          ></ju-icon>
+        <div class="edit_svg task-del" @click="handleDeleteTodo(item.id)">
+          <ju-icon name="close" :size="16"></ju-icon>
         </div>
       </div>
     </div>
+    <div class="lh-40 text-c" v-else>今日无事</div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { reactive, ref } from "vue";
 import JuIcon from "../JuComponents/JuIcon.vue";
+import { TodoModel } from "@/modules/common";
+import { addTodo, deleteTodo, getTodayTodoList, updateTodo } from "@/api/home";
+import { JuMessage } from "@/utils/components/JuMessage";
+
+const todoList = ref<TodoModel[]>([]);
+const todoForm = reactive({
+  todoThing: "",
+});
+
+const getTodoList = async () => {
+  const { data } = await getTodayTodoList();
+  todoList.value = data;
+};
+getTodoList();
+
+// ------------------------------ 新增 ------------------------------
+const handleAddTodo = async () => {
+  if (!todoForm.todoThing) {
+    return;
+  }
+  const res = await addTodo({
+    todoThing: todoForm.todoThing,
+    todoSort: todoList.value.length + 1,
+  });
+
+  if (res.code === 0) {
+    JuMessage.success("添加成功");
+    todoForm.todoThing = "";
+    getTodoList();
+  } else {
+    JuMessage.error("添加失败");
+  }
+};
+
+// ------------------------------ 修改 ------------------------------
+const handleUpdate = async (item: TodoModel) => {
+  item.isEnd = item.isEnd ? 0 : 1;
+  setTimeout(async () => {
+    const res = await updateTodo(item);
+    if (res.code === 0) {
+      getTodoList();
+    } else {
+      JuMessage.error("修改失败");
+    }
+  }, 200);
+};
+
+// ------------------------------ 删除 ------------------------------
+const handleDeleteTodo = async (id: number) => {
+  const res = await deleteTodo(id);
+  if (res.code === 0) {
+    JuMessage.success("删除成功");
+    getTodoList();
+  } else {
+    JuMessage.error("删除失败");
+  }
+};
 </script>
 <style lang="scss" scoped>
 @import "@/styles/mixin.scss";
@@ -116,7 +193,7 @@ import JuIcon from "../JuComponents/JuIcon.vue";
   @include box-shadow();
   background-color: var(--bg-main);
   color: var(--text);
-  padding: 10px 20px 30px;
+  padding: 10px 20px 10px;
   .task-header {
     margin-bottom: 10px;
   }
@@ -136,7 +213,6 @@ import JuIcon from "../JuComponents/JuIcon.vue";
       line-height: 40px;
       display: flex;
       align-items: center;
-      gap: 10px;
       transition: 0.3s background;
       &:hover {
         background-color: var(--input-bg);
@@ -144,6 +220,9 @@ import JuIcon from "../JuComponents/JuIcon.vue";
         .task-del {
           width: 20px;
         }
+      }
+      .finish-icon {
+        transition: 0.2s all;
       }
       .task_content {
         flex: 1;

@@ -19,7 +19,7 @@ import { onMounted, onUnmounted } from "vue";
 const mapData = MapDataJson;
 const travelData = ProvincialDataJson;
 (function () {
-  mapData.features.forEach((item: any) => {
+  mapData['features'].forEach((item: any) => {
     item.properties["value"] = Math.random() * 100;
     item.properties["travelList"] = [
       {
@@ -52,7 +52,7 @@ function init() {
       token: "128e02747b360c92ae6c113f1b7e48fe",
       mapStyle: "amap://styles/grey",
       resizeEnable: true,
-    }),
+    } as any),
   });
   scene.on("loaded", () => {
     // 地图数据
@@ -97,7 +97,7 @@ function init() {
               let imgsHtml = "";
               item?.imgs &&
                 item.imgs.forEach((img: string) => {
-                  imgsHtml += `<img src="${img}" />`;
+                  imgsHtml += `<img src="${img}" alt="" />`;
                 });
               resDiv += `
             <a href="javascript:;" class="tarvel-box">

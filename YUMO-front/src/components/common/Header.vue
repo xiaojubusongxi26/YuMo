@@ -48,7 +48,7 @@ nav {
   transition: 0.4s;
   position: sticky;
   top: 0;
-  z-index: 10001;
+  z-index: 2000;
   // margin-bottom: 20px;
 }
 .nav {

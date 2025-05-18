@@ -26,8 +26,25 @@ html {
   --bg-light2: rgba(255, 255, 255, 0.2);
   --bg-light3: rgba(255, 255, 255, 0.3);
 
+  --text: #000000;
+  --text-second: #3c3c43cc;
+  --text__hover: #010101;
+  --bg: #f8f9fe;
+  --bg-menu__hover: rgba(0, 0, 0, 0.03);
+  --bg-main: #ffffff;
+  --border: #e3e8f7;
+  --box-border: #425aef;
+  --theme-bg: #cedbf4;
+  --theme-border: #8cace5;
+  --theme-select: #ffffff99;
+  --mask-window: rgba(0, 0, 0, 0.05);
+  --divider: #e2e2e3;
+
   /* Ju组件样式 */
   --ju-popover-background: #454545;
+}
+:root {
+  --el-color-primary: #425aef !important;
 }
 
 body {
@@ -77,12 +94,27 @@ input[type="number"] {
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
-  -moz-appearance: textfield;
+  // -moz-appearance: textfield;
+  // appearance: none;
 }
 
 input {
   border: none;
   outline: none;
+}
+
+.flex-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cur-p {
+  cursor: pointer;
+}
+
+.text-c {
+  text-align: center;
 }
 
 // 单行文本省略
@@ -91,4 +123,35 @@ input {
   text-overflow: ellipsis;
   white-space: nowrap;
   word-break: break-all;
+}
+
+// 默认盒子样式：字体等
+.default-box {
+  color: var(--text);
+}
+
+.icon-bg {
+  @include flex-center();
+  @include hover-area();
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.el-message {
+  padding: 15px 30px !important;
+  border-width: 2px !important;
+  .el-message__content {
+    font-size: 16px !important;
+  }
+  .el-message-icon--success {
+    color: #fff !important;
+  }
+}
+.el-message.is-plain,
+.el-message--success {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
+}
+.el-message--success .el-message__content {
+  color: #fff !important;
 }

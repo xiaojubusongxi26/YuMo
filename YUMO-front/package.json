@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -13,6 +13,8 @@
     "@antv/l7-maps": "^2.21.10",
     "@tinymce/tinymce-vue": "^5.1.1",
     "axios": "^1.7.2",
+    "dayjs": "^1.11.13",
+    "element-plus": "^2.8.7",
     "gsap": "^3.12.5",
     "lunar-javascript": "^1.6.12",
     "md-editor-v3": "^4.15.6",

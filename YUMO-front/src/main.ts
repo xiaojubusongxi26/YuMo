@@ -1,6 +1,8 @@
 import { createApp } from "vue";
 import "./styles/index.scss";
-
+import "./styles/each.scss";
+import "element-plus/dist/index.css";
+import ElementPlus from "element-plus";
 import Directives from "@/directives/index.ts";
 
 import JuDivider from "@/components/JuComponents/JuDivider.vue";
@@ -11,6 +13,8 @@ import JuIcon from "./components/JuComponents/JuIcon.vue";
 import JuTitle from "./components/JuComponents/JuTitle.vue";
 import JuCalendar from "./components/JuComponents/Calendar/JuCalendar.vue";
 import JuFullModal from "./components/JuComponents/JuFullModal.vue";
+import JuTextarea from "./components/JuComponents/JuTextarea.vue";
+import JuUpload from "./components/JuComponents/JuUpload.vue";
 
 /* 引入重置样式 */
 import "@/common/css/reset.css";
@@ -31,9 +35,12 @@ app.component("JuIcon", JuIcon);
 app.component("JuTitle", JuTitle);
 app.component("JuCalendar", JuCalendar);
 app.component("JuFullModal", JuFullModal);
+app.component("JuTextarea", JuTextarea);
+app.component("JuUpload", JuUpload);
 
 app.use(router);
 app.use(pinia);
 app.use(Directives);
+app.use(ElementPlus);
 
 app.mount("#app");

@@ -8,7 +8,7 @@ import {
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    component: () => import("@/views/index.vue"),
+    component: () => import("../views/index.vue"),
     children: [
       {
         path: "/",
@@ -49,6 +49,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "/test",
         name: "测试",
         component: () => import("@/views/test.vue"),
+      },
+      {
+        path: "/center",
+        name: "中转页",
+        component: () => import("@/views/center.vue"),
       },
     ],
   },

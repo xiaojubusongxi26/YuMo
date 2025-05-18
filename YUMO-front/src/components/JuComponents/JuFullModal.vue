@@ -3,17 +3,15 @@
     <Transition name="fade" appear>
       <div class="ju-full-modal" v-if="value">
         <div class="mask" @click="closeModal"></div>
-        <div
-          class="modal-content"
-          :class="{
-            modal__full: props.type === 'full',
-            modal__bottom: props.type === 'bottom',
-          }"
-        >
+        <div class="modal-content" :class="classNames">
+          <div v-if="title" class="title">{{ title }}</div>
           <div class="close" v-if="showClose" @click="closeModal">
             <ju-icon name="close"></ju-icon>
           </div>
           <slot></slot>
+          <div class="footer">
+            <slot name="footer"></slot>
+          </div>
         </div>
       </div>
     </Transition>
@@ -21,19 +19,25 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from "vue";
+import { computed, watch } from "vue";
 import JuIcon from "./JuIcon.vue";
 
 type JuFullModal = {
   type?: string;
   showClose?: boolean;
+  title?: string;
 };
 
 const props = withDefaults(defineProps<JuFullModal>(), {
   type: "bottom",
   showClose: true,
+  title: "",
 });
-
+const classNames = computed(() => {
+  return `${props.type === "full" ? "modal__full" : ""} ${
+    props.type === "bottom" ? "modal__bottom" : ""
+  }`;
+});
 const value = defineModel({ type: Boolean, default: true });
 
 watch(
@@ -101,6 +105,14 @@ function Move() {
     box-shadow: 0px -4px 16px 10px rgba(0, 0, 0, 0.1);
     padding: 80px 50px;
     box-sizing: border-box;
+    .title {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      color: var(--text);
+    }
     .close {
       @include flex-center();
       background-color: var(--theme-color);
@@ -116,6 +128,11 @@ function Move() {
         transition: 0.3s all;
         color: #fff;
       }
+    }
+    .footer {
+      position: absolute;
+      right: 50px;
+      bottom: 30px;
     }
   }
   .modal__full {

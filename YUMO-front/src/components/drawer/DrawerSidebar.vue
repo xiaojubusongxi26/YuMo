@@ -66,6 +66,9 @@
         </div>
       </div>
     </div>
+    <div class="sidebar-box">
+      
+    </div>
   </div>
 </template>
 

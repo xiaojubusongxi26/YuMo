@@ -25,3 +25,12 @@ export interface WebOptionModel {
   sign: string;
   defaultImg: string;
 }
+
+// 代办事项
+export interface TodoModel {
+  id: number;
+  todoThing: string;
+  todoDate: string;
+  isEnd: number | boolean;
+  todoSort: number;
+}

@@ -22,7 +22,6 @@
         </template>
         <template v-else>
           <div class="calendar-tool__tag" @click="selectToday">今</div>
-          <div class="calendar-tool__tag">周计划</div>
         </template>
       </div>
     </div>
@@ -62,7 +61,7 @@
             {{ computedDateInfo(dateObj) }}
           </div>
           <ju-icon
-            v-if="dateObj.happy"
+            v-if="!!dateObj.birthday"
             name="happy"
             class="happy"
             :size="props.isSimplify ? 10 : 16"
@@ -74,11 +73,12 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import {
   getTodayDate,
   getCalendarDates,
   computedDateInfo,
+  fetchBirthdayByYear,
   type DateInfoModel,
 } from "./utils";
 import JuIcon from "../JuIcon.vue";
@@ -94,6 +94,15 @@ const current = reactive({
   month: today.month,
 });
 const showDateList = ref(getCalendarDates(current.year, current.month - 1));
+
+// ------------------------------ 年份修改重新请求生日信息 ------------------------------
+watch(
+  () => current.year,
+  (val) => {
+    val && fetchBirthdayByYear(Number(val));
+  },
+  { immediate: true }
+);
 
 // ------------------------------ 选中日期 ------------------------------
 const selectDay = defineModel({ type: String });

@@ -10,6 +10,7 @@
           :theme="options.theme[app.theme]"
           :preview-theme="options.theme[app.theme]"
         />
+        <DocumentInfo />
         <DocumentFooter></DocumentFooter>
       </div>
       <div class="preview-right">
@@ -31,6 +32,7 @@
 import TestMdStr from "@/assets/md/test.md?raw";
 import DocumentHeader from "./DocumentHeader.vue";
 import DocumentFooter from "./DocumentFooter.vue";
+import DocumentInfo from "./DocumentInfo.vue";
 import { reactive, ref } from "vue";
 import { appStore } from "@/store/app.ts";
 import { MdPreview, MdCatalog } from "md-editor-v3";
@@ -49,9 +51,12 @@ const options = reactive({
 const text = ref(TestMdStr);
 const scrollElement = document.documentElement;
 
+// 高度还原
+const content = document.querySelector("html");
+content.scrollTop = 0;
+
 // ------------------------------ 主题切换 ------------------------------
 const theme = app.theme;
-console.log(app);
 </script>
 <style lang="scss" scoped>
 @import "@/styles/mixin";

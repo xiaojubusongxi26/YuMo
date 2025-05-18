@@ -43,7 +43,7 @@
 }
 
 // 蒙层
-@mixin mask($opacity: .3, $zIndex: 1000) {
+@mixin mask($opacity: 0.3, $zIndex: 1000) {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,4 +58,14 @@
     Lato, Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-weight: $weight;
   font-size: $size;
+}
+
+// 通用色点击悬浮
+@mixin hover-area($time: 0.1s) {
+  transition: $time all;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--box-border);
+    color: var(--bg);
+  }
 }

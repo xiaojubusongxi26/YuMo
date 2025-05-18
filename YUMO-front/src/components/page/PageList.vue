@@ -106,12 +106,12 @@ function toPageDetail(page: PageListModule) {
   .page-list-item {
     margin-bottom: 30px;
     background-color: var(--bg-main);
-    @include box-border();
     border-radius: 12px;
     overflow: hidden;
     display: flex;
-    @include box-shadow();
     cursor: pointer;
+    @include box-border();
+    @include box-shadow();
     &:hover {
       img {
         transform: scale(1.05);
@@ -146,7 +146,6 @@ function toPageDetail(page: PageListModule) {
         flex: 1;
         font-size: 20px;
         font-weight: bolder;
-        cursor: default;
         letter-spacing: 1.5px;
       }
       .page--detail {
