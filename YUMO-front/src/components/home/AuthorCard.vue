@@ -1,5 +1,7 @@
 <template>
-  <div class="author-box">
+  <div
+    class="author-box box-shadow br-12 mb-30 pl-20 pr-20 pb-30 border-default box-sizing color-default bg-default"
+  >
     <header class="author-head">
       <ju-image :src="webOption.avatar" />
       <h3>{{ webOption.author }}</h3>
@@ -8,21 +10,21 @@
     <ju-divider :title="'网站记录'" />
     <div class="record-box">
       <div class="record-item">
-        <span class="record-icon">
+        <span class="record-icon flex-c">
           <ju-icon name="web" :size="20" />
         </span>
         <span class="record-title">建站天数：</span>
         <span class="record-data">300天</span>
       </div>
       <div class="record-item">
-        <span class="record-icon">
+        <span class="record-icon flex-c">
           <ju-icon name="document" :size="20" />
         </span>
         <span class="record-title">文章：</span>
         <span class="record-data">128篇</span>
       </div>
       <div class="record-item">
-        <span class="record-icon">
+        <span class="record-icon flex-c">
           <ju-icon name="travel" :size="20" />
         </span>
         <span class="record-title">游记：</span>
@@ -38,15 +40,8 @@ import { appStore } from "@/store/app";
 const { webOption } = appStore();
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin.scss";
 .author-box {
-  @include card-box();
   width: 100%;
-  background-color: var(--bg-main);
-  @include box-shadow();
-  color: var(--text);
-  box-sizing: border-box;
-  padding: 0 20px 30px;
   .author-head {
     display: flex;
     flex-direction: column;
@@ -72,7 +67,6 @@ const { webOption } = appStore();
       line-height: 40px;
       display: flex;
       .record-icon {
-        @include flex-center();
         padding-right: 10px;
         svg {
           color: var(--text);

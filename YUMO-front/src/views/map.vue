@@ -105,7 +105,7 @@ function init() {
                   ${imgsHtml}
                 </div>
                 <div class="tarvel-text">
-                  <div class="content">
+                  <div class="content ellipsis-2">
                     ${item.content}
                   </div>
                   <div class="time">${item.time}</div>
@@ -163,7 +163,6 @@ onUnmounted(() => {
 });
 </script>
 <style lang="scss">
-@import "@/styles/mixin";
 #map {
   width: 100vw;
   height: 99.5vh;
@@ -224,7 +223,6 @@ onUnmounted(() => {
         line-height: 18px;
         font-size: 14px;
         padding-right: 5px;
-        @include multiline-ellipsis();
       }
       .time {
         line-height: 24px;

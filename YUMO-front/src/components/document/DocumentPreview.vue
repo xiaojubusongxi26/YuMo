@@ -59,7 +59,6 @@ content.scrollTop = 0;
 const theme = app.theme;
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .preview-box {
   width: 100%;
   .preview-top {
@@ -77,7 +76,11 @@ const theme = app.theme;
     overflow: hidden;
     padding-bottom: 30px;
     background-color: var(--bg-main);
-    @include card-box();
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border);
+    box-sizing: border-box;
     .preview-document {
       transition: 0.5s all;
     }
@@ -87,23 +90,25 @@ const theme = app.theme;
     flex: 0 0 300px;
     margin-left: 20px;
     .preview-catalog {
-      @include card-box();
-      @include box-border();
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      box-sizing: border-box;
+      transition: 0.5s all;
       background-color: var(--bg-main);
       overflow: hidden;
       position: sticky;
       top: 180px;
+      &:hover {
+        border: 1px solid var(--box-border);
+      }
       .catalog-box {
         background-color: var(--md-bk-color);
         padding-top: 10px;
       }
     }
   }
-}
-
-.divider {
-  @include font-title(20px);
-  padding: 0 20px;
 }
 
 /* 修改组件默认样式 */

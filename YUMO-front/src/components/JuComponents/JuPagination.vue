@@ -196,7 +196,6 @@ const goPreOrNext = (countPage: number) => {
 };
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .ju-pagination {
   display: flex;
   justify-content: center;
@@ -215,8 +214,12 @@ const goPreOrNext = (countPage: number) => {
     margin: 0 8px;
     box-shadow: var(--shadow-border);
     cursor: pointer;
-    @include box-border();
-    transition: 0.3s all;
+    transition: 0.5s all;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    &:hover {
+      border: 1px solid var(--box-border);
+    }
   }
   .page_btn {
     width: 80px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="task-card">
+  <div class="task-card box-shadow">
     <header class="task-header">
       <h2 class="font-famaily__title">
         <svg
@@ -42,7 +42,7 @@
         v-model.trim="todoForm.todoThing"
         v-debounce:keydown.enter="{ handler: handleAddTodo, delay: 300 }"
       />
-      <div class="edit_svg">
+      <div class="edit_svg flex-c">
         <ju-icon name="edit" :size="22"></ju-icon>
       </div>
     </div>
@@ -86,7 +86,7 @@
           </svg>
         </span>
         <span class="task_number fs-16 ml-10">{{ index + 1 }}.</span>
-        <div class="task_content">
+        <div class="task_content ellipsis">
           <ju-popover>
             <template v-slot:reference>
               {{ item.todoThing }}
@@ -164,7 +164,6 @@ const handleDeleteTodo = async (id: number) => {
 };
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin.scss";
 .edit_svg {
   position: absolute;
   width: 32px;
@@ -172,7 +171,6 @@ const handleDeleteTodo = async (id: number) => {
   border-radius: 8px;
   top: 4px;
   right: 4px;
-  @include flex-center();
   cursor: pointer;
   &:hover {
     background-color: var(--input-bg);
@@ -189,8 +187,11 @@ const handleDeleteTodo = async (id: number) => {
   box-sizing: border-box;
 }
 .task-card {
-  @include card-box();
-  @include box-shadow();
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
   background-color: var(--bg-main);
   color: var(--text);
   padding: 10px 20px 10px;
@@ -226,12 +227,6 @@ const handleDeleteTodo = async (id: number) => {
       }
       .task_content {
         flex: 1;
-        @include ellipsis();
-      }
-      .task_status {
-        @include flex-center();
-        height: 40px;
-        transition: 0.3s width;
       }
       .task-del {
         transition: 0.3s width;

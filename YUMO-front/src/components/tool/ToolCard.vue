@@ -12,7 +12,7 @@
       >
         <img :src="web.icon" alt="" />
         <div>{{ web.title }}</div>
-        <div class="description">{{ web.description }}</div>
+        <div class="description ellipsis">{{ web.description }}</div>
       </a>
     </div>
   </div>
@@ -25,7 +25,6 @@ const props = defineProps<{
 }>();
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .tool-card {
   h1 {
     margin: 10px 0;
@@ -36,8 +35,16 @@ const props = defineProps<{
     flex-wrap: wrap;
     gap: 20px;
     .web-item {
-      @include card-box();
-      @include box-border();
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-sizing: border-box;
+      transition: 0.5s all;
+      box-sizing: border-box;
+      border: 1px solid var(--border);
+      &:hover {
+        border: 1px solid var(--box-border);
+      }
       width: 200px;
       height: 70px;
       padding: 10px 10px 10px 70px;
@@ -63,7 +70,6 @@ const props = defineProps<{
       .description {
         font-size: 12px;
         color: var(--text-second);
-        @include ellipsis();
       }
     }
   }

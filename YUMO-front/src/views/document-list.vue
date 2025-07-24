@@ -50,6 +50,17 @@ function toggleTab(index: number) {
 }
 </script>
 <style lang="scss" scoped>
+.bar-item {
+  transition: 0.3s all;
+  &:hover {
+    background-color: var(--theme-color);
+    color: #fff !important;
+  }
+}
+.bar-item__active {
+  background-color: var(--theme-color);
+  color: #fff !important;
+}
 .link-bar-item {
   color: var(--text);
   padding: 0px 8px;

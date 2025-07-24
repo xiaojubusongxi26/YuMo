@@ -1,13 +1,13 @@
 <template>
   <JuFullModal v-model="visible" title="新的开始">
-    <div class="edit-tabs">
-      <div class="tab-boder">
+    <div class="flex justify-end items-center mt-15 mb-15">
+      <div class="tab-boder flex-c br-10">
         <div
           class="tab-hover"
           :style="{ left: 2 + tabInfo.hover * 80 + 'px' }"
         ></div>
         <div
-          class="edit-tab"
+          class="edit-tab flex-c"
           :class="{ current: tabInfo.hover === 0 }"
           @mouseover="hoverTab(0, 'in')"
           @mouseleave="hoverTab(0)"
@@ -17,7 +17,7 @@
           生活
         </div>
         <div
-          class="edit-tab"
+          class="edit-tab flex-c"
           :class="{ current: tabInfo.hover === 1 }"
           @mouseover="hoverTab(1, 'in')"
           @mouseleave="hoverTab(1)"
@@ -27,7 +27,7 @@
           摄影
         </div>
         <div
-          class="edit-tab"
+          class="edit-tab flex-c"
           :class="{ current: tabInfo.hover === 2 }"
           @mouseover="hoverTab(2, 'in')"
           @mouseleave="hoverTab(2)"
@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineExpose, reactive } from "vue";
+import { ref, reactive } from "vue";
 import LiveEditor from "./LiveEditor.vue";
 const visible = ref(false);
 // 编辑类型：live camera daily
@@ -75,46 +75,38 @@ defineExpose({
 });
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
-.edit-tabs {
-  @include flex-center(flex-end);
-  margin: 15px 0;
-  .tab-boder {
-    @include flex-center();
-    border-radius: 10px;
-    border: 2px solid var(--border);
-    position: relative;
-    background-color: var(--bg);
-    .tab-hover {
-      position: absolute;
-      left: 2px;
-      top: 2px;
-      height: 36px;
-      width: 76px;
-      background-color: var(--box-border);
-      z-index: 0;
-      border-radius: 8px;
-      transition: 0.3s left;
-    }
-    .current {
-      color: #fff;
-    }
+.tab-boder {
+  position: relative;
+  border: 2px solid var(--border);
+  background-color: var(--bg);
+  .tab-hover {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    height: 36px;
+    width: 76px;
+    background-color: var(--box-border);
+    z-index: 0;
+    border-radius: 8px;
+    transition: 0.3s left;
   }
-  .edit-tab {
-    @include flex-center();
-    width: 80px;
-    gap: 5px;
-    height: 40px;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-    color: var(--text);
-    &:first-child {
-      border-radius: 5px 0 0 5px;
-    }
-    &:last-child {
-      border-radius: 0 5px 5px 0;
-    }
+  .current {
+    color: #fff;
+  }
+}
+.edit-tab {
+  width: 80px;
+  gap: 5px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  color: var(--text);
+  &:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+  &:last-child {
+    border-radius: 0 5px 5px 0;
   }
 }
 </style>

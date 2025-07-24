@@ -1,10 +1,10 @@
 <template>
-  <div class="default-box">
+  <div class="color-default">
     <header class="header-bar">
       <div class="hi">嗨，今天想做什么？</div>
       <!-- 切换类型 -->
       <!-- 编辑 -->
-      <div class="icon-bg" @click="openEditor()">
+      <div class="icon-bg flex-c" @click="openEditor()">
         <ju-icon name="edit" :size="20"></ju-icon>
       </div>
     </header>
@@ -85,7 +85,6 @@ const openEditor = () => {
 };
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .link-bar-item {
   color: var(--text);
   padding: 0px 8px;
@@ -94,8 +93,6 @@ const openEditor = () => {
   border-radius: 8px;
 }
 .header-bar {
-  @include card-box();
-  @include box-border(2px);
   background-color: var(--bg-main);
   display: flex;
   flex-wrap: nowrap;
@@ -106,6 +103,15 @@ const openEditor = () => {
   margin-bottom: 30px;
   overflow: hidden;
   padding: 0 10px;
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  transition: 0.5s all;
+  box-sizing: border-box;
+  border: 2px solid var(--border);
+  &:hover {
+    border: 2px solid var(--box-border);
+  }
   .hi {
     flex: 1;
     font-size: 14px;
@@ -113,10 +119,14 @@ const openEditor = () => {
     user-select: none;
   }
   .icon-bg {
-    @include flex-center();
-    @include hover-area();
+    transition: 0.1s all;
+    cursor: pointer;
     padding: 8px;
     border-radius: 5px;
+    &:hover {
+      background-color: var(--box-border);
+      color: var(--bg);
+    }
   }
 }
 </style>

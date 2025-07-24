@@ -1,5 +1,5 @@
 <template>
-  <div class="window-box">
+  <div class="window-box flex-c">
     <template v-if="isDark">
       <div class="movie_bar" style="top: 0"></div>
       <div class="movie_bar" style="bottom: 0"></div>
@@ -39,12 +39,13 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/mixin";
 .window-box {
   width: 100%;
   height: 100vh;
-  @include card-box;
-  @include flex-center();
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
   padding: 10px;
   border-radius: 0;
   border: none;
@@ -76,8 +77,11 @@ onMounted(() => {
     left: 50%;
     transform: translate(-50%, -50%);
     animation: show-in 2s ease-out;
-    text-shadow: 0px 0px 10px #f8f9fe, 0px 0px 20px #f8f9fe,
-      0px 0px 30px #f8f9fe, 0px 0px 40px #f8f9fe;
+    text-shadow:
+      0px 0px 10px #f8f9fe,
+      0px 0px 20px #f8f9fe,
+      0px 0px 30px #f8f9fe,
+      0px 0px 40px #f8f9fe;
     opacity: 0.8;
     @keyframes show-in {
       from {

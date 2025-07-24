@@ -5,7 +5,7 @@
         <div class="mask" @click="closeModal"></div>
         <div class="modal-content" :class="classNames">
           <div v-if="title" class="title">{{ title }}</div>
-          <div class="close" v-if="showClose" @click="closeModal">
+          <div class="close flex-c" v-if="showClose" @click="closeModal">
             <ju-icon name="close"></ju-icon>
           </div>
           <slot></slot>
@@ -82,7 +82,6 @@ function Move() {
 }
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .ju-full-modal {
   position: fixed;
   top: 0;
@@ -101,7 +100,9 @@ function Move() {
     left: 0;
     background-color: var(--bg-main);
     position: fixed;
-    transition: opacity 0.3s, top 0.3s;
+    transition:
+      opacity 0.3s,
+      top 0.3s;
     box-shadow: 0px -4px 16px 10px rgba(0, 0, 0, 0.1);
     padding: 80px 50px;
     box-sizing: border-box;
@@ -114,7 +115,6 @@ function Move() {
       color: var(--text);
     }
     .close {
-      @include flex-center();
       background-color: var(--theme-color);
       width: 50px;
       height: 50px;
@@ -151,7 +151,9 @@ function Move() {
 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s, top 0.3s;
+  transition:
+    opacity 0.3s,
+    top 0.3s;
 }
 .fade-enter-from,
 .fade-leave-to {

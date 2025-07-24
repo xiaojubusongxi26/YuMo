@@ -151,15 +151,21 @@ function mouseLeave() {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .heat-box {
-  @include card-box();
-  @include box-border();
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+  transition: 0.5s all;
   display: flex;
   flex-wrap: wrap;
   background-color: var(--bg-main);
   color: var(--text);
   padding: 20px;
+  &:hover {
+    border: 1px solid var(--box-border);
+  }
   .heat-title {
     width: 100%;
     text-align: center;

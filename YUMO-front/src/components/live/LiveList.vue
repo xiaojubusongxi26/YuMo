@@ -1,8 +1,6 @@
 <template>
   <div class="live-box">
-    <div class="live-item">
-      
-    </div>
+    <div class="live-item box-shadow"></div>
     <ju-pagination
       v-model:pageNum="pageInfo.pageNum"
       :total="pageInfo.total"
@@ -12,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive, ref } from "vue";
 
 // 分页数据
 const pageInfo = reactive({
@@ -34,9 +32,11 @@ const pageInfo = reactive({
     overflow: hidden;
     display: flex;
     cursor: pointer;
-    @include box-border();
-    @include box-shadow();
+    transition: 0.5s all;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
     &:hover {
+      border: 1px solid var(--box-border);
       img {
         transform: scale(1.05);
       }

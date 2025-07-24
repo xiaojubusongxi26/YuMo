@@ -1,7 +1,7 @@
 <template>
   <div class="page-list" ref="pageList">
     <div
-      class="page-list-item"
+      class="page-list-item box-shadow"
       v-for="page in showData"
       :key="page.pageId"
       @click="toPageDetail(page)"
@@ -97,7 +97,6 @@ function toPageDetail(page: PageListModule) {
 }
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .page-list {
   display: flex;
   flex-direction: column;
@@ -110,9 +109,11 @@ function toPageDetail(page: PageListModule) {
     overflow: hidden;
     display: flex;
     cursor: pointer;
-    @include box-border();
-    @include box-shadow();
+    transition: 0.5s all;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
     &:hover {
+      border: 1px solid var(--box-border);
       img {
         transform: scale(1.05);
       }

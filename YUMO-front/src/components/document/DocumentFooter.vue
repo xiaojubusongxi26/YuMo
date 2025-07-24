@@ -8,7 +8,9 @@
     >
       <div class="next-info">
         <div class="next_arrow">{{ index ? "下一篇" : "上一篇" }}</div>
-        <div class="next-name">{{ doc.name }}</div>
+        <div class="next-name font-famaily__title fs-18 fw-bold">
+          {{ doc.name }}
+        </div>
       </div>
       <div class="mask"></div>
     </div>
@@ -34,7 +36,6 @@ const nextList = ref([
 ]);
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .footer-box {
   margin-top: 20px;
   padding: 0 20px;
@@ -52,7 +53,10 @@ const nextList = ref([
     overflow: hidden;
     background-size: 100%;
     background-position: center;
-    @include card-box();
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border);
+    box-sizing: border-box;
     &:hover {
       background-size: 110%;
       .mask {
@@ -69,12 +73,15 @@ const nextList = ref([
       justify-content: center;
       gap: 20px;
       padding-left: 40px;
-      .next-name {
-        @include font-title(18px);
-      }
     }
     .mask {
-      @include mask(0.4, 0);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
       transition: 0.3s opacity;
     }
   }

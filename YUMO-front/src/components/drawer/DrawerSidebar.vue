@@ -5,7 +5,7 @@
         <ju-icon class="icon_s" name="search" :size="16" />
         <input type="text" placeholder="搜索" />
       </div>
-      <div class="create">
+      <div class="create flex-c">
         <ju-icon name="add" :size="16" />
         <div class="create__hover">
           <div class="create-hover-box">
@@ -66,15 +66,12 @@
         </div>
       </div>
     </div>
-    <div class="sidebar-box">
-      
-    </div>
+    <div class="sidebar-box"></div>
   </div>
 </template>
 
 <script setup lang="ts"></script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .drawer-sidebar {
   box-sizing: border-box;
   padding-top: 20px;
@@ -110,7 +107,6 @@
       border-radius: 8px;
       border: 1px solid #e3e6e5;
       color: #747474;
-      @include flex-center();
       position: relative;
       cursor: pointer;
       &:hover {

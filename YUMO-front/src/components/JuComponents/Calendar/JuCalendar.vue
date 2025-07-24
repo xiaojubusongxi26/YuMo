@@ -31,10 +31,13 @@ const selectDay = ref<string>("");
 const isFullCalendar = defineModel("full");
 </script>
 <style lang="scss" scoped>
-@import "@/styles/mixin";
 .ju-calendar {
   margin: auto;
-  @include card-box();
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
   width: 100%;
   max-width: 1280px;
   max-height: 800px;
