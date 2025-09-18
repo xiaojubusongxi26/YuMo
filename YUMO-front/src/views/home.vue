@@ -3,7 +3,7 @@
     <home-window :is-movie="true" />
     <div class="main-box">
       <div class="main-top">
-        <heat-map></heat-map>
+        <!-- <heat-map></heat-map> -->
       </div>
       <div class="main-left">
         <home-page />
@@ -14,7 +14,7 @@
         <ju-calendar v-model:full="isFullCalendar" :is-simplify="true" />
       </div>
     </div>
-    <JuFullModal v-model="isFullCalendar">
+    <JuFullModal v-model="isFullCalendar" :type="'full'" :transparent="true">
       <ju-calendar></ju-calendar
     ></JuFullModal>
   </div>

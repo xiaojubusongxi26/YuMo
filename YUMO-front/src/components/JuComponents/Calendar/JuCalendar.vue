@@ -10,7 +10,7 @@
       :is-simplify="props.isSimplify"
     ></calendar-table>
     <calendar-panel
-      v-if="!isSimplify"
+      v-show="!isSimplify"
       v-model="selectDay"
       class="calendar-right"
     ></calendar-panel>
@@ -35,7 +35,7 @@ const isFullCalendar = defineModel("full");
   margin: auto;
   width: 100%;
   border-radius: 12px;
-  margin-bottom: 30px;
+  margin-top: 30px;
   border: 1px solid var(--border);
   box-sizing: border-box;
   width: 100%;

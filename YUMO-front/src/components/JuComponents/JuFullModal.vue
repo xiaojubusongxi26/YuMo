@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <Transition name="fade" appear>
-      <div class="ju-full-modal" v-if="value">
+      <div class="ju-full-modal" v-show="value">
         <div class="mask" @click="closeModal"></div>
         <div class="modal-content" :class="classNames">
           <div v-if="title" class="title">{{ title }}</div>
@@ -26,17 +26,21 @@ type JuFullModal = {
   type?: string;
   showClose?: boolean;
   title?: string;
+  transparent?: boolean;
 };
 
 const props = withDefaults(defineProps<JuFullModal>(), {
   type: "bottom",
   showClose: true,
   title: "",
+  transparent: false,
 });
 const classNames = computed(() => {
-  return `${props.type === "full" ? "modal__full" : ""} ${
-    props.type === "bottom" ? "modal__bottom" : ""
-  }`;
+  const className = [];
+  props.type === "full" && className.push("modal__full");
+  props.type === "bottom" && className.push("modal__bottom");
+  props.transparent && className.push("modal__transparent");
+  return className.join(" ");
 });
 const value = defineModel({ type: Boolean, default: true });
 
@@ -134,6 +138,10 @@ function Move() {
       right: 50px;
       bottom: 30px;
     }
+  }
+  .modal__transparent {
+    background: transparent !important;
+    box-shadow: none;
   }
   .modal__full {
     top: 0;

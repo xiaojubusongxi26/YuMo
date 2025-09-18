@@ -44,13 +44,15 @@ onMounted(() => {
   height: 100vh;
   border-radius: 12px;
   margin-bottom: 30px;
-  border: 1px solid var(--border);
   box-sizing: border-box;
   padding: 10px;
   border-radius: 0;
   border: none;
   overflow: hidden;
   position: relative;
+  transition:
+    0.5s width,
+    0.5s height;
   .wallpaper {
     width: 100%;
     height: 100%;

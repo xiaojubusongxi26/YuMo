@@ -3,6 +3,7 @@
     :is="iconMap[props.name]"
     :size="props.size"
     :color="props.color"
+    :options="props.options"
   ></component>
 </template>
 
@@ -16,12 +17,14 @@ interface IconProps {
   name: string;
   size?: number;
   color?: string;
+  options?: Record<string, any> | null;
 }
 
 const props = withDefaults(defineProps<IconProps>(), {
   name: "",
   size: 30,
   color: "currentColor",
+  options: null,
 });
 
 type IconMap = {

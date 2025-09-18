@@ -51,41 +51,29 @@
         class="task-item line-bar"
         v-for="(item, index) in todoList"
         :key="item.id"
+        @click="clickTodoItem(item, index)"
       >
+        <!-- TODO: 修改代办任务 -->
+        <!-- <el-input
+          v-if="false"
+          v-model.trim="currentTodo"
+          @blur="handleUpdatePre"
+        ></el-input> -->
         <span
           class="flex-c cur-p"
           :style="{
-            color: item.isEnd ? '#3fb20e' : '#000',
+            color: item.isEnd ? '#3fb20e' : 'inherit',
             transform: '.2s color',
           }"
-          @click="handleUpdate(item)"
+          @click="handleChangeStatus(item)"
         >
-          <svg
-            t="1746716307566"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="11891"
-            width="18"
-            height="18"
-          >
-            <path
-              d="M791.1 957.6H233.5c-75.5 0-136.9-61.4-136.9-136.9V199.5C96.6 124 158 62.6 233.5 62.6h557.7c75.5 0 136.9 61.4 136.9 136.9v621.2c-0.1 75.5-61.5 136.9-137 136.9zM233.5 152.1c-26.1 0-47.4 21.3-47.4 47.4v621.2c0 26.1 21.3 47.4 47.4 47.4h557.7c26.1 0 47.4-21.3 47.4-47.4V199.5c0-26.1-21.3-47.4-47.4-47.4H233.5z"
-              fill="currentColor"
-              class="finish-icon"
-              p-id="11892"
-            ></path>
-            <path
-              v-show="item.isEnd"
-              d="M457.4 702c-11.4 0-22.9-4.4-31.6-13.1L286.3 549.4c-17.5-17.5-17.5-45.8 0-63.3s45.8-17.5 63.3 0l107.8 107.8L675 376.4c17.5-17.5 45.8-17.5 63.3 0s17.5 45.8 0 63.3L489.1 688.9c-8.8 8.7-20.2 13.1-31.7 13.1z"
-              fill="currentColor"
-              class="finish-icon"
-              p-id="11893"
-            ></path>
-          </svg>
+          <ju-icon
+            :size="18"
+            name="square"
+            :options="{ isEnd: item.isEnd }"
+          ></ju-icon>
         </span>
-        <span class="task_number fs-16 ml-10">{{ index + 1 }}.</span>
+        <span class="task_number fs-16 ml-10 mr-5">{{ index + 1 }}.</span>
         <div class="task_content ellipsis">
           <ju-popover>
             <template v-slot:reference>
@@ -93,7 +81,10 @@
             </template>
           </ju-popover>
         </div>
-        <div class="edit_svg task-del" @click="handleDeleteTodo(item.id)">
+        <div
+          class="edit_svg task-del flex-c"
+          @click="handleDeleteTodo(item.id)"
+        >
           <ju-icon name="close" :size="16"></ju-icon>
         </div>
       </div>
@@ -140,8 +131,9 @@ const handleAddTodo = async () => {
 };
 
 // ------------------------------ 修改 ------------------------------
+const currentTodo = ref<string | null>(null);
+const currentIndex = ref<number | null>(null);
 const handleUpdate = async (item: TodoModel) => {
-  item.isEnd = item.isEnd ? 0 : 1;
   setTimeout(async () => {
     const res = await updateTodo(item);
     if (res.code === 0) {
@@ -150,6 +142,27 @@ const handleUpdate = async (item: TodoModel) => {
       JuMessage.error("修改失败");
     }
   }, 200);
+};
+// 修改完成状态
+const handleChangeStatus = (item: TodoModel) => {
+  item.isEnd = item.isEnd ? 0 : 1;
+  handleUpdate(item);
+};
+const clickTodoItem = (item: TodoModel, index: number) => {
+  currentTodo.value = item.todoThing;
+  currentIndex.value = index;
+};
+const handleUpdatePre = async () => {
+  if (currentIndex.value === null || currentTodo.value === null) {
+    currentIndex.value = null;
+    currentTodo.value = null;
+    return;
+  }
+  const item = todoList.value[currentIndex.value];
+  item.todoThing = currentTodo.value;
+  await handleUpdate(item);
+  currentTodo.value = null;
+  currentIndex.value = null;
 };
 
 // ------------------------------ 删除 ------------------------------
