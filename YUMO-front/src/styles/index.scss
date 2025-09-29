@@ -84,6 +84,22 @@ input {
 .bg-default {
   background-color: var(--bg-main);
 }
+.icon-hover {
+  transition: 0.1s all;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--bg-light3);
+    color: var(--theme-color);
+  }
+}
+.icon-hover_bg {
+  transition: 0.1s all;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--box-border);
+    color: var(--bg);
+  }
+}
 
 /* 全局常用样式 */
 .flex-c {
@@ -97,6 +113,9 @@ input {
 .text-c {
   text-align: center;
 }
+.align-center {
+  align-items: center;
+}
 
 // 文字类
 .font-famaily__title {
@@ -108,6 +127,9 @@ input {
   text-overflow: ellipsis;
   white-space: nowrap;
   word-break: break-all;
+}
+a .link-default {
+  color: var(--text-second);
 }
 
 // 框架样式
@@ -138,13 +160,26 @@ input {
   .el-message-icon--success {
     color: #fff !important;
   }
+  .el-message-icon--info {
+    display: none;
+    color: #fff !important;
+  }
 }
 .el-message.is-plain,
 .el-message--success {
-  background-color: var(--theme-color) !important;
-  border-color: var(--theme-color) !important;
+  background-color: #67c23a !important;
+  border-color: #67c23a !important;
 }
 .el-message--success .el-message__content {
+  color: #fff !important;
+}
+
+.el-message.is-plain,
+.el-message--info {
+  background-color: var(--theme-color) !important;
+  border-color: var(--box-border) !important;
+}
+.el-message--info .el-message__content {
   color: #fff !important;
 }
 

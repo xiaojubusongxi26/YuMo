@@ -6,6 +6,14 @@ const JuMessage = function (options: any) {
   });
 };
 
+JuMessage.info = function (msg: string, options?: any) {
+  ElMessage({
+    offset: 100,
+    message: msg,
+    ...options,
+  });
+};
+
 JuMessage.success = function (msg: string, options?: any) {
   ElMessage({
     offset: 100,

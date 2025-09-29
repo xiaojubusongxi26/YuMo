@@ -3,10 +3,10 @@
     <div class="calendar-tool">
       <div class="calendar-tool_left">
         <div class="calendar-tool__btn" @click="toggleMonth(-1)">
-          <ju-icon name="arrow-left" :size="18" />
+          <ju-icon name="arrowLeft" :size="18" />
         </div>
         <div class="calendar-tool__btn" @click="toggleMonth(1)">
-          <ju-icon name="arrow-right" :size="18" />
+          <ju-icon name="arrowRight" :size="18" />
         </div>
       </div>
       <div class="calendar-tool_center">
@@ -15,7 +15,7 @@
       <div class="calendar-tool_right">
         <template v-if="props.isSimplify">
           <ju-icon
-            name="full-screen"
+            name="fullScreen"
             @click="isFullCalendar = true"
             :size="20"
           />

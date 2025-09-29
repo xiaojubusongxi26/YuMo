@@ -13,6 +13,13 @@
     -webkit-line-clamp: $i;
     -webkit-box-orient: vertical;
   }
+  .double-line-#{$i} {
+    word-break: break-all;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    -webkit-box-orient: vertical;
+  }
 }
 @for $i from 1 through 80 {
   .mt-#{$i} {

@@ -7,6 +7,7 @@
         <router-link class="menu" to="/document">文档</router-link>
         <router-link class="menu" to="/drawer">抽屉</router-link>
         <router-link class="menu" to="/map">游记</router-link>
+        <router-link class="menu" to="/work">工作台</router-link>
         <router-link class="menu" to="/tools">工具箱</router-link>
       </div>
       <div class="theme">

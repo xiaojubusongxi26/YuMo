@@ -4,6 +4,7 @@ import "./styles/each.scss";
 import "element-plus/dist/index.css";
 import ElementPlus from "element-plus";
 import Directives from "@/directives/index.ts";
+import { svgPreloader } from "@/utils/svgPreloader";
 
 import JuDivider from "@/components/JuComponents/JuDivider.vue";
 import JuPagination from "@/components/JuComponents/JuPagination.vue";
@@ -23,6 +24,8 @@ import pinia from "./store";
 
 // 引入路由
 import router from "./router/index";
+
+await svgPreloader.loadAllIcons();
 
 const app = createApp(App);
 

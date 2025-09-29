@@ -1,17 +1,23 @@
 <template>
-  <component
+  <!-- <component
     :is="iconMap[props.name]"
     :size="props.size"
     :color="props.color"
     :options="props.options"
-  ></component>
+  ></component> -->
+  <svg
+    viewBox="0 0 1024 1024"
+    class="svg-icon"
+    :style="iconStyle"
+    aria-hidden="true"
+    v-html="iconContent"
+    v-bind="$attrs"
+  ></svg>
 </template>
 
 <script setup lang="ts">
-import { ref, markRaw, onMounted } from "vue";
-import JuWeb from "../icon/JuWeb.vue";
-import { getKebabCase } from "@/utils/util";
-import { defineAsyncComponent } from "vue";
+import { computed } from "vue";
+import { svgPreloader } from "@/utils/svgPreloader";
 
 interface IconProps {
   name: string;
@@ -27,19 +33,37 @@ const props = withDefaults(defineProps<IconProps>(), {
   options: null,
 });
 
-type IconMap = {
-  [key: string]: typeof JuWeb;
-};
-
-const iconMap = ref<IconMap>({});
-onMounted(() => {
-  const modules: any = import.meta.glob("@/components/icon/*.vue");
-  for (let path in modules) {
-    const iconName = path.match(/\/([^/]+)\.vue$/)?.[1].split("Ju")[1] || "";
-    iconMap.value[getKebabCase(iconName)] = markRaw(
-      defineAsyncComponent(modules[path])
-    );
-  }
+// type IconMap = {
+//   [key: string]: typeof JuWeb;
+// };
+// const iconMap = ref<IconMap>({});
+// onMounted(() => {
+//   const modules: any = import.meta.glob("@/components/icon/*.vue");
+//   for (let path in modules) {
+//     const iconName = path.match(/\/([^/]+)\.vue$/)?.[1].split("Ju")[1] || "";
+//     iconMap.value[getKebabCase(iconName)] = markRaw(
+//       defineAsyncComponent(modules[path])
+//     );
+//   }
+// });
+const iconStyle = computed(() => {
+  return {
+    fontSize: `${props.size}px`,
+    color: props.color,
+    width: `${props.size}px`,
+    height: `${props.size}px`,
+  };
+});
+const iconContent = computed(() => {
+  return svgPreloader.getIcon(props.name);
 });
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.svg-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+</style>
